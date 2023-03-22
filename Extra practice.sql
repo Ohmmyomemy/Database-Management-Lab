@@ -1,0 +1,176 @@
+Select *
+from professor;
+
+Select * 
+From department;
+
+Select STU_FNAME , STU_LNAME 
+FROM STUDENT;
+
+SELECT STU_FNAME AS FNAME  , STU_LNAME AS LNAME
+FROM STUDENT;
+
+SELECT distinct COURSE_CODE
+FROM CLASS;
+
+SELECT distinct COURSE_CODE , CLASS_ROOM
+FROM CLASS;
+
+SELECT  COURSE_CODE , CRS_CREDIT 
+FROM COURSE;
+
+SELECT CLASS_CODE , COURSE_CODE , CLASS_ROOM , CLASS_TIME
+FROM CLASS;
+
+SELECT CLASS_ROOM , COURSE_CODE
+FROM CLASS
+GROUP BY COURSE_CODE
+LIMIT 5;
+
+SELECT DISTINCT EMP_NUM , COURSE_CODE 
+FROM CLASS;
+
+SELECT EMP_FNAME AS FIRSTNAME , EMP_LNAME AS LASTNAME , EMP_DOB AS DOB
+FROM professor
+limit 10;
+ 
+SELECT EMP_FNAME AS FIRSTNAME , EMP_LNAME AS LASTNAME , year(curdate())-year(EMP_DOB) AS AGE
+FROM professor
+limit 10;
+
+SELECT * 
+FROM COURSE
+order by CRS_CREDIT ASC;
+
+SELECT STU_FNAME , STU_LNAME , STU_GPA
+FROM STUDENT
+ORDER BY STU_GPA desc
+LIMIT 3;
+
+SELECT STU_FNAME , STU_LNAME , STU_GPA
+FROM STUDENT
+where STU_GPA > 3.50;
+
+SELECT STU_FNAME , STU_LNAME , STU_GPA
+FROM STUDENT
+where STU_GPA < 3.50 AND STU_GPA > 3.25;
+
+SELECT STU_FNAME , STU_LNAME , STU_GPA
+FROM STUDENT
+where STU_GPA < 2.0 AND STU_GPA > 1.80;
+
+SELECT STU_FNAME , STU_LNAME , STU_GPA
+FROM STUDENT 
+where STU_GPA IS NULL;
+
+SELECT STU_FNAME , STU_LNAME , STU_DOB 
+FROM STUDENT
+WHERE year(STU_DOB) between 1970 AND 1979;
+
+select DEPT_CODE 
+FROM DEPARTMENT
+order by DEPT_CODE ASC;
+
+select *
+FROM STUDENT
+WHERE EMP_NUM = 209;
+
+select EMP_FNAME , EMP_LNAME , DEPT_CODE
+FROM PROFESSOR
+where DEPT_CODE = 'CIS' OR DEPT_CODE = 'MATH'
+ORDER BY DEPT_CODE ASC;
+
+select *
+FROM STUDENT
+WHERE DEPT_CODE = 'CIS' AND STU_FNAME LIKE 'A%';
+
+SELECT *
+FROM STUDENT
+WHERE STU_LNAME LIKE '%SON';
+
+select COURSE_CODE , COURSE_NAME , CRS_CREDIT , DEPT_CODE
+FROM COURSE
+WHERE COURSE_NAME LIKE 'INTRO%';
+
+select COURSE_CODE , COURSE_NAME , CRS_CREDIT , DEPT_CODE
+FROM COURSE
+WHERE COURSE_NAME NOT LIKE 'INTRO%';
+
+select COURSE_CODE , COURSE_NAME , CRS_CREDIT , DEPT_CODE
+FROM COURSE
+WHERE DEPT_CODE = 'ACCT' OR DEPT_CODE = 'ECON/FIN' OR DEPT_CODE = 'MKT/MGT';
+
+select COURSE_CODE , COURSE_NAME , CRS_CREDIT , DEPT_CODE
+FROM COURSE
+WHERE COURSE_CODE LIKE '%3__'; # __ = เป็นการกำหนดในตารางว่าจะเเอาเลขตัวไหนขึ้นก่อน
+
+SELECT CLASS_CODE , COURSE_CODE , CLASS_TIME
+FROM CLASS
+WHERE CLASS_TIME LIKE 'MWF%' AND CLASS_SECTION = 2;
+
+#q32
+SELECT CLASS_CODE , COURSE_CODE , CLASS_TIME
+FROM CLASS
+WHERE CLASS_TIME LIKE "%10:00-10:50 A.M."  AND CLASS_SECTION = 1;
+
+
+#q33
+SELECT CLASS_CODE , COURSE_CODE , CLASS_TIME
+FROM CLASS
+WHERE CLASS_TIME LIKE "%p.m."  AND CLASS_SECTION = 3;
+
+#q34
+SELECT *
+FROM CLASS
+WHERE EMP_NUM like '1_5'
+ORDER BY EMP_NUM asc;
+
+   --  Q35
+select COURSE_CODE , COURSE_NAME , DEPT_CODE
+FROM COURSE
+WHERE DEPT_CODE = 'CIS' OR DEPT_CODE = 'ENG' OR DEPT_CODE = 'MATH'
+ORDER BY DEPT_CODE asc;
+
+select `COURSE_CODE`, `COURSE_NAME`, `DEPT_CODE`
+FROM `course`
+WHERE `COURSE_NAME` LIKE '%Application%';
+
+      -- q37-38
+select dept_name, dept_address
+from department
+where dept_address like 'BBG%';
+
+select dept_name, dept_address
+from department
+where dept_address NOT like 'BBG%' AND dept_address NOT like 'KLR%';
+
+select class_code , course_code , emp_num
+from class
+where emp_num = 104 or emp_num = 105 or emp_num = 106 or emp_num = 155
+order by emp_num asc;
+
+ -- 40 --
+select emp_num , course_code , class_time
+from class
+where course_code like '%3__' and emp_num < 300 and class_time like 'MWF%'
+order by emp_num desc
+limit 4;
+
+select emp_num , email
+from professor
+limit 3;
+
+select emp_num , concat(lower(emp_fname),".",substring(lower(emp_lname),1,3),"@tinycollege.edu")
+as email
+from professor
+where dept_code = "ACCT";
+
+select *
+from student
+where month(stu_dob) = 11
+order by dept_code asc;
+
+SELECT *
+FROM STUDENT
+WHERE dayofweek(STU_DOB) = 5
+ORDER BY DEPT_CODE ASC;
